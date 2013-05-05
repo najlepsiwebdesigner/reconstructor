@@ -80,7 +80,7 @@ void RawImagesWindow :: update(const ntk::RGBDImage& image)
 
   int x,y;
   ui->depthView->getLastMousePos(x,y);
-  m_controller.on_depth_mouse_moved(x,y);
+//  m_controller.on_depth_mouse_moved(x,y);
 }
 
 //void RawImagesWindow::on_outputDirText_editingFinished()
@@ -90,55 +90,55 @@ void RawImagesWindow :: update(const ntk::RGBDImage& image)
 //}
 
 
-void RawImagesWindow::on_action_GrabOneFrame_triggered()
-{
-  m_controller.frameRecorder()->saveCurrentFrame(m_controller.lastImage());
-}
+//void RawImagesWindow::on_action_GrabOneFrame_triggered()
+//{
+//  m_controller.frameRecorder()->saveCurrentFrame(m_controller.lastImage());
+//}
 
-void RawImagesWindow::on_action_Quit_triggered()
-{
-  m_controller.quit();
-}
+//void RawImagesWindow::on_action_Quit_triggered()
+//{
+//  m_controller.quit();
+//}
 
-void RawImagesWindow::on_action_Filters_toggled(bool active)
-{
-  m_controller.toggleFilters(active);
-}
+//void RawImagesWindow::on_action_Filters_toggled(bool active)
+//{
+//  m_controller.toggleFilters(active);
+//}
 
-void RawImagesWindow::on_action_Screen_capture_mode_toggled(bool active)
-{
-  m_controller.setScreenCaptureMode(active);
-}
+//void RawImagesWindow::on_action_Screen_capture_mode_toggled(bool active)
+//{
+//  m_controller.setScreenCaptureMode(active);
+//}
 
-void RawImagesWindow::on_action_GrabFrames_toggled(bool active)
-{
-  m_controller.setGrabFrames(active);
-}
+//void RawImagesWindow::on_action_GrabFrames_toggled(bool active)
+//{
+//  m_controller.setGrabFrames(active);
+//}
 
-void RawImagesWindow::on_syncMode_toggled(bool checked)
-{
-  m_controller.grabber().setSynchronous(checked);
-  if (checked)
-    m_controller.grabber().newEvent();
-}
+//void RawImagesWindow::on_syncMode_toggled(bool checked)
+//{
+//  m_controller.grabber().setSynchronous(checked);
+//  if (checked)
+//    m_controller.grabber().newEvent();
+//}
 
-void RawImagesWindow::closeEvent(QCloseEvent *event)
-{
-  ui->action_Quit->trigger();
-  event->accept();
-}
+//void RawImagesWindow::closeEvent(QCloseEvent *event)
+//{
+//  ui->action_Quit->trigger();
+//  event->accept();
+//}
 
-void RawImagesWindow::on_actionPause_toggled(bool active)
-{
-  m_controller.setPaused(active);
-}
+//void RawImagesWindow::on_actionPause_toggled(bool active)
+//{
+//  m_controller.setPaused(active);
+//}
 
-void RawImagesWindow::on_actionNext_frame_triggered()
-{
-  m_controller.processOneFrame();
-}
+//void RawImagesWindow::on_actionNext_frame_triggered()
+//{
+//  m_controller.processOneFrame();
+//}
 
-void RawImagesWindow::on_testButton_clicked()
-{
-  m_controller.quit();
-}
+//void RawImagesWindow::on_testButton_clicked()
+//{
+//  m_controller.quit();
+//}

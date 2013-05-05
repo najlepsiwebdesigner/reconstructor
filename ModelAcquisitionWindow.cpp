@@ -29,6 +29,7 @@
 #include <ntk/utils/time.h>
 #include <fstream>
 
+
 #include <ntk/utils/opencv_utils.h>
 #include <QFileDialog>
 #include <QMessageBox>
@@ -41,7 +42,9 @@ ModelAcquisitionWindow::ModelAcquisitionWindow(GuiController& controller, QWidge
     m_iteration(0)
 {
   ui->setupUi(this);
-  // ui->mesh_view->enableLighting();
+//  ui->mesh_view->enableLighting();
+//   ui->mesh_view->setShowGrid(true);+
+
 }
 
 ModelAcquisitionWindow::~ModelAcquisitionWindow()
@@ -80,6 +83,26 @@ void ModelAcquisitionWindow::on_stopButton_clicked()
 {
   m_controller.modelAcquisitionController()->setPaused(true);
 }
+
+
+
+void ModelAcquisitionWindow::on_startGrabButton_clicked(
+        )
+{
+
+  m_controller.setGrabFrames(true);
+}
+
+void ModelAcquisitionWindow::on_stopGrabButton_clicked(
+        )
+{
+  m_controller.setGrabFrames(false);
+}
+
+void ModelAcquisitionWindow::setOutputDirText(QString text){
+    ui->outputDirText->insert(text);
+}
+
 
 void ModelAcquisitionWindow::on_resetButton_clicked()
 {
@@ -131,5 +154,7 @@ void ModelAcquisitionWindow::update(const ntk::RGBDImage& image)
 
    int x,y;
    ui->depthView->getLastMousePos(x,y);
-   m_controller.on_depth_mouse_moved(x,y);
+
+//   ui->mesh_view->updateDisplayCenter();
+//   m_controller.on_depth_mouse_moved(x,y);
 }

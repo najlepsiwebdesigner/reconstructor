@@ -26,11 +26,14 @@
 #include <ntk/utils/time.h>
 #include <ntk/geometry/pose_3d.h>
 #include <ntk/mesh/mesh_viewer.h>
+#include <ntk/mesh/mesh_generator.h>
 
 #include <QtConcurrentRun>
+#include <QMessageBox>
 
 using namespace ntk;
 using namespace cv;
+
 
 void ModelAcquisitionController :: grabAndMove()
 {
@@ -58,8 +61,13 @@ bool ModelAcquisitionController :: newFrameThread(const ntk::RGBDImage* image)
   m_pose_estimator->addNewImage(*image);
   bool pose_ok = m_pose_estimator->estimateCurrentPose();
   if (!pose_ok)
+  {
+
+     /// check the pose!
+
     return false;
-  m_modeler.addNewView(*image, m_pose_estimator->currentPose());
+  }
+    m_modeler.addNewView(*image, m_pose_estimator->currentPose());
   m_modeler.computeMesh();
   return true;
 }
@@ -85,7 +93,7 @@ void ModelAcquisitionController :: newFrame(const ntk::RGBDImage& image)
     {
       if (m_new_frame_run.result())
       {        
-        m_controller.modelAcquisitionWindow()->ui->mesh_view->addMesh(m_modeler.currentMesh(), Pose3D(), MeshViewer::FLAT);
+        m_controller.modelAcquisitionWindow()->ui->mesh_view->addMesh(m_modeler.currentMesh(), Pose3D(), MeshViewer::FLAT_WIREFRAME);
         m_controller.modelAcquisitionWindow()->ui->mesh_view->swapScene();
       }
     }

@@ -135,8 +135,8 @@ int main (int argc, char** argv)
         processor = new ntk::FreenectRGBDProcessor();
     }
 
-    if (opt::sync())
-        grabber->setSynchronous(true);
+//    if (opt::sync())
+//        grabber->setSynchronous(true);
 
     RGBDFrameRecorder frame_recorder (opt::dir_prefix());
     frame_recorder.setSaveOnlyRaw(false);

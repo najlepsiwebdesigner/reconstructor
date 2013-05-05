@@ -68,15 +68,15 @@ public:
   RawImagesWindow* rawImagesWindow() {return m_raw_images_window;}
 
 public:
-  void toggleFilters(bool );
-  void toggleModeler(bool );
+//  void toggleFilters(bool );
+//  void toggleModeler(bool );
   void setScreenCaptureMode(bool active) { m_screen_capture_mode = active; }
   void setGrabFrames(bool active) { m_grab_frames = active; }
   void quit();
 
 public slots:
   virtual void onRGBDDataUpdated();
-  void on_depth_mouse_moved(int x, int y);
+//  void on_depth_mouse_moved(int x, int y);
 
 protected:
   virtual void handleAsyncEvent(ntk::EventListener::Event) { onRGBDDataUpdated(); }

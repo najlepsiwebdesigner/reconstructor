@@ -40,6 +40,8 @@ public:
     ~ModelAcquisitionWindow();
 public:
     void update(const ntk::RGBDImage& image);
+    void setOutputDirText(QString text);
+    void on_outputDirText_editingFinished();
 
 private:
     Ui::ModelAcquisitionWindow *ui;
@@ -55,6 +57,8 @@ private slots:
     void on_resetButton_clicked();
     void on_actionQuit_triggered();
     void on_grabButton_clicked();
+    void on_startGrabButton_clicked();
+    void on_stopGrabButton_clicked();
 
 private:
     float m_angle_delta;
