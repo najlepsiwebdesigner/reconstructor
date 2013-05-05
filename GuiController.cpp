@@ -111,10 +111,11 @@ void GuiController :: onRGBDDataUpdated()
   line(m_last_image.amplitudeRef(), Point(102, 0), Point(102,204), Scalar(0,0,0));
 #endif
 
-  // imshow("color", m_last_image.rgb());
+//   imshow("color", m_last_image.rgb());
 
   if (m_raw_images_window->isVisible())
     m_raw_images_window->update(m_last_image);
+    m_model_window->update(m_last_image);
 
   if (m_frame_recorder && (m_screen_capture_mode || m_grab_frames))
     m_frame_recorder->saveCurrentFrame(m_last_image);

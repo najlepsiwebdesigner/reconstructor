@@ -23,8 +23,14 @@
 #include "GuiController.h"
 #include "ModelAcquisitionController.h"
 
+#include <ntk/camera/rgbd_frame_recorder.h>
+#include <ntk/camera/rgbd_processor.h>
+
 #include <ntk/utils/time.h>
 #include <fstream>
+
+#include <ntk/utils/opencv_utils.h>
+
 
 ModelAcquisitionWindow::ModelAcquisitionWindow(GuiController& controller, QWidget *parent) :
     QMainWindow(parent),
@@ -68,4 +74,33 @@ void ModelAcquisitionWindow::on_stopButton_clicked()
 void ModelAcquisitionWindow::on_resetButton_clicked()
 {
   m_controller.modelAcquisitionController()->reset();
+}
+
+
+void ModelAcquisitionWindow::update(const ntk::RGBDImage& image)
+{
+   // display color image in this window
+   ui->colorView->setImage(image.rgb());
+
+  // display depth image in this window
+   if (ui->depthView->isVisible())
+   {
+     double min_dist = m_controller.rgbdProcessor().minDepth();
+     double max_dist = m_controller.rgbdProcessor().maxDepth();
+     cv::Mat1f masked_distance; image.depth().copyTo(masked_distance);
+     ntk::apply_mask(masked_distance, image.depthMask());
+     cv::Mat3b depth_as_color;
+     ntk::compute_color_encoded_depth(masked_distance, depth_as_color, &min_dist, &max_dist);
+     ui->depthView->setImage(depth_as_color);
+   }
+    // ui->depthView->setImageAsColor(image.depth(), &min_dist, &max_dist);
+    // ui->depthView->setImage(image.depth(), &min_dist, &max_dist);
+    //  if (image.amplitude().data && ui->amplitudeView->isVisible())
+    //    ui->amplitudeView->setImage(image.amplitude());
+    //  if (image.intensity().data && ui->intensityView->isVisible())
+    //    ui->intensityView->setImage(image.intensity());
+
+   int x,y;
+   ui->depthView->getLastMousePos(x,y);
+   m_controller.on_depth_mouse_moved(x,y);
 }

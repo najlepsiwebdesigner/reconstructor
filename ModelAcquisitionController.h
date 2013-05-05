@@ -51,6 +51,7 @@ public:
   void setPoseEstimator(ntk::IncrementalPoseEstimatorFromImage* estimator) { m_pose_estimator = estimator; }
   ntk::RGBDModeler& modeler() { return m_modeler; }
 
+
 private:
   bool newFrameThread(const ntk::RGBDImage* image);
 

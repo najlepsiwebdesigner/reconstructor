@@ -25,6 +25,7 @@
 #include <ntk/camera/rgbd_frame_recorder.h>
 #include <ntk/camera/rgbd_processor.h>
 #include <ntk/utils/opencv_utils.h>
+
 #ifdef NESTK_USE_FREENECT
 # include <ntk/camera/freenect_grabber.h>
 #endif
@@ -45,7 +46,7 @@ RawImagesWindow::RawImagesWindow(GuiController& controller, QWidget *parent) :
   ui->depthView->setMouseTracking(true);
 
   ui->action_Show_Object_Detector->setDisabled(true);
-  ui->action_3D_View->setDisabled(false);
+  ui->action_3D_View->setDisabled(true);
 
   if (m_controller.grabber().isSynchronous())
     ui->syncMode->setChecked(true);
@@ -87,6 +88,7 @@ void RawImagesWindow::on_outputDirText_editingFinished()
   QString dir = ui->outputDirText->text();
   m_controller.frameRecorder()->setDirectory(dir.toStdString());
 }
+
 
 void RawImagesWindow::on_action_GrabOneFrame_triggered()
 {
@@ -136,20 +138,7 @@ void RawImagesWindow::on_actionNext_frame_triggered()
   m_controller.processOneFrame();
 }
 
-//void RawImagesWindow::on_actionShow_IR_toggled(bool v)
-//{
-//#ifdef NESTK_USE_FREENECT
-//  FreenectGrabber* freenect_grabber = dynamic_cast<FreenectGrabber*>(&m_controller.grabber());
-//  if (freenect_grabber)
-//    freenect_grabber->setIRMode(v);
-//#endif
-//}
-
-//void RawImagesWindow::on_actionDual_RGB_IR_mode_toggled(bool v)
-//{
-//#ifdef NESTK_USE_FREENECT
-//  FreenectGrabber* freenect_grabber = dynamic_cast<FreenectGrabber*>(&m_controller.grabber());
-//  if (freenect_grabber)
-//    freenect_grabber->setDualRgbIR(v);
-//#endif
-//}
+void RawImagesWindow::on_testButton_clicked()
+{
+  m_controller.quit();
+}

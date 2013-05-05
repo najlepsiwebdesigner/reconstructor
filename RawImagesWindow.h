@@ -21,7 +21,6 @@
 #define RAWIMAGESWINDOW_H
 
 #include <ntk/camera/calibration.h>
-
 #include <QMainWindow>
 
 namespace Ui {
@@ -58,10 +57,11 @@ private slots:
     void on_action_Quit_triggered();
     void on_action_GrabOneFrame_triggered();
     void on_outputDirText_editingFinished();
-    void on_actionShow_IR_toggled(bool v);
-    void on_actionDual_RGB_IR_mode_toggled(bool v);
+    void on_testButton_clicked();
 
     friend class GuiController;
+    friend class ModelAcquisitionController;
+    friend class FrameModelAcquisitionController;
 };
 
 #endif // RAWIMAGESWINDOW_H

@@ -65,6 +65,7 @@ public:
   const ntk::RGBDImage& lastImage() const { return m_last_image; }
 
   ModelAcquisitionWindow* modelAcquisitionWindow() { return m_model_window; }
+  RawImagesWindow* rawImagesWindow() {return m_raw_images_window;}
 
 public:
   void toggleFilters(bool );

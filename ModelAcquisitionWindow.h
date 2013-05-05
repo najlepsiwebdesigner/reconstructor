@@ -20,7 +20,10 @@
 #ifndef MODELACQUISITIONWINDOW_H
 #define MODELACQUISITIONWINDOW_H
 
+#include <ntk/camera/calibration.h>
 #include <QMainWindow>
+
+
 
 namespace Ui {
     class ModelAcquisitionWindow;
@@ -35,6 +38,8 @@ class ModelAcquisitionWindow : public QMainWindow
 public:
     explicit ModelAcquisitionWindow(GuiController& controller, QWidget *parent = 0);
     ~ModelAcquisitionWindow();
+public:
+    void update(const ntk::RGBDImage& image);
 
 private:
     Ui::ModelAcquisitionWindow *ui;
