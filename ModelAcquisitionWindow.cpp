@@ -30,7 +30,8 @@
 #include <fstream>
 
 #include <ntk/utils/opencv_utils.h>
-
+#include <QFileDialog>
+#include <QMessageBox>
 
 ModelAcquisitionWindow::ModelAcquisitionWindow(GuiController& controller, QWidget *parent) :
     QMainWindow(parent),
@@ -61,6 +62,15 @@ void ModelAcquisitionWindow::on_saveMeshButton_clicked()
       .currentMesh().saveToPlyFile("scene_mesh.ply");
 }
 
+void ModelAcquisitionWindow::on_saveAsMeshButton_clicked()
+{
+  QString temp = QFileDialog::getSaveFileName(this, tr("Save Image"), ".", tr("Standford Graphics Format Files (*.ply)"));
+
+  m_controller.modelAcquisitionController()->modeler().computeSurfaceMesh();
+  m_controller.modelAcquisitionController()->modeler().currentMesh().saveToPlyFile(temp.toUtf8().constData());
+
+}
+
 void ModelAcquisitionWindow::on_startButton_clicked()
 {
   m_controller.modelAcquisitionController()->setPaused(false);
@@ -75,6 +85,25 @@ void ModelAcquisitionWindow::on_resetButton_clicked()
 {
   m_controller.modelAcquisitionController()->reset();
 }
+
+void ModelAcquisitionWindow::on_outputDirText_editingFinished()
+{
+  QString dir = ui->outputDirText->text();
+  m_controller.frameRecorder()->setDirectory(dir.toStdString());
+}
+
+
+void ModelAcquisitionWindow::on_grabButton_clicked()
+{
+  m_controller.frameRecorder()->saveCurrentFrame(m_controller.lastImage());
+}
+
+
+void ModelAcquisitionWindow::on_actionQuit_triggered()
+{
+  m_controller.quit();
+}
+
 
 
 void ModelAcquisitionWindow::update(const ntk::RGBDImage& image)

@@ -47,11 +47,14 @@ private:
 
 private slots:
     void on_saveMeshButton_clicked();
+    void on_saveAsMeshButton_clicked();
     void on_resetCamera_clicked();
 
     void on_startButton_clicked();
     void on_stopButton_clicked();
     void on_resetButton_clicked();
+    void on_actionQuit_triggered();
+    void on_grabButton_clicked();
 
 private:
     float m_angle_delta;

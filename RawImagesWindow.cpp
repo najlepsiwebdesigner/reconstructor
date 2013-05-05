@@ -83,11 +83,11 @@ void RawImagesWindow :: update(const ntk::RGBDImage& image)
   m_controller.on_depth_mouse_moved(x,y);
 }
 
-void RawImagesWindow::on_outputDirText_editingFinished()
-{
-  QString dir = ui->outputDirText->text();
-  m_controller.frameRecorder()->setDirectory(dir.toStdString());
-}
+//void RawImagesWindow::on_outputDirText_editingFinished()
+//{
+//  QString dir = ui->outputDirText->text();
+//  m_controller.frameRecorder()->setDirectory(dir.toStdString());
+//}
 
 
 void RawImagesWindow::on_action_GrabOneFrame_triggered()
